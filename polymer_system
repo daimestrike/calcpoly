@@ -1,0 +1,84 @@
+package main
+
+import (
+    "fmt"
+    "math"
+)
+
+func main() {
+    // Ввод данных
+    fmt.Println("Введите площадь пола в квадратных метрах:")
+    var area float64
+    fmt.Scan(&area)
+
+    // Выбор типа полимерного пола
+    fmt.Println("Выберите тип полимерного пола:")
+    fmt.Println("1. Эпоксидная смола")
+    fmt.Println("2. Полиуретановая смола")
+    var typeFloor int
+    fmt.Scan(&typeFloor)
+
+    // Ввод плотности материала
+    fmt.Println("Введите плотность материала в кг/м³:")
+    var density float64
+    fmt.Scan(&density)
+
+    // Ввод цвета материала
+    fmt.Println("Выберите цвет материала:")
+    fmt.Println("1. Прозрачный")
+    fmt.Println("2. Цветной")
+    var color int
+    fmt.Scan(&color)
+
+    // Ввод типа системы
+    fmt.Println("Выберите тип системы:")
+    fmt.Println("1. Насыпная")
+    fmt.Println("2. Наливная")
+    var system int
+    fmt.Scan(&system)
+
+    // Расчёт расхода материала
+    var consumption float64
+    switch typeFloor {
+    case 1:
+        if color == 1 {
+            consumption = 0.2
+        } else {
+            consumption = 0.25
+        }
+    case 2:
+        if color == 1 {
+            consumption = 0.15
+        } else {
+            consumption = 0.20
+        }
+    default:
+        fmt.Println("Неправильный выбор типа пола.")
+        return
+    }
+
+    // Расчёт количества материала
+    var quantity float64
+    quantity = area / consumption
+
+    // Расчёт расхода кварцевого песка
+    var sandConsumption float64
+    if color == 1 {
+        sandConsumption = 0.0
+    } else {
+        sandConsumption = 0.05
+    }
+
+    // Расчёт количества кварцевого песка
+    var sandQuantity float64
+    sandQuantity = quantity * sandConsumption
+
+    // Расчёт толщины слоя
+    var thickness float64
+    thickness = quantity / area
+
+    // Вывод результатов
+    fmt.Println("Количество материала, необходимого для покрытия пола площадью", area, "квадратных метров:", quantity, "килограммов")
+    fmt.Println("Количество кварцевого песка, необходимого для покрытия пола площадью", area, "квадратных метров:", sandQuantity, "килограммов")
+    fmt.Println("Толщина слоя:", thickness, "миллиметра")
+}
